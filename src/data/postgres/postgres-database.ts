@@ -1,8 +1,8 @@
 import { DataSource } from 'typeorm';
 import { User } from './models/user.model';
 import { Pin } from './models/pin.model';
-import { CredentialStorage } from './models/credential.Storage';
-import { SecurityBox } from './models/securityBox';
+import { CredentialStorage } from './models/credential.Storage.model';
+import { SecurityBox } from './models/securityBox.model';
 
 interface Options {
 	host: string;

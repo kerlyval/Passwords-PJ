@@ -6,7 +6,7 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SecurityBox } from './securityBox';
+import { SecurityBox } from './securityBox.model';
 
 @Entity()
 export class CredentialStorage extends BaseEntity {
