@@ -8,6 +8,10 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
+export enum Status {
+	ACTIVE = 'ACTIVE',
+	DELETED = 'DELETED',
+}
 @Entity()
 export class SecurityBox extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
@@ -33,11 +37,11 @@ export class SecurityBox extends BaseEntity {
 	icon: string;
 
 	//checar esto del status OJITOOO!!!
-	@Column('varchar', {
-		nullable: false,
-		default: 'Active',
+	@Column('enum', {
+		enum: Status,
+		default: Status.ACTIVE,
 	})
-	status: string;
+	status: Status;
 
 	// @ManyToOne(() => SecurityBox, (user) => user.security_boxes)
 	// @JoinColumn({ name: 'UserId' })

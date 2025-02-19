@@ -52,10 +52,11 @@ export class User extends BaseEntity {
 	})
 	password: string;
 
-	@Column('bool', {
-		default: true,
+	@Column('enum', {
+		enum: Status,
+		default: Status.ACTIVE,
 	})
-	status: boolean;
+	status: Status;
 
 	// @OneToMany(() => Post, (post) => post.user)
 	// posts: Post[];

@@ -66,9 +66,10 @@ export class UserService {
 
 	async findUserByEmail(email: string) {
 		const user = await User.findOne({
+			//TODO: Revisar esto
 			where: {
 				email,
-				status: true,
+				status: Status.ACTIVE,
 			},
 		});
 
@@ -101,7 +102,7 @@ export class UserService {
 				select: ['id', 'name', 'surname', 'email', 'cellphone', 'status'],
 			});
 		} catch (error) {
-			throw CustomError.internalServer('Error obteniendo datos');
+			throw CustomError.internalServer('Error getting data');
 		}
 	}
 
@@ -132,7 +133,7 @@ export class UserService {
 		const user = await this.findOneUser(id);
 
 		user.name = userData.name.toLowerCase().trim();
-		user.surname = userData.surname.trim();
+		user.surname = userData.surname.toLowerCase().trim();
 		user.email = userData.email.toLowerCase().trim();
 		user.cellphone = userData.cellphone.trim();
 		try {
@@ -142,15 +143,15 @@ export class UserService {
 		}
 	}
 
-	async deletePost(id: string) {
-		const post = await this.findOneUser(id);
+	async deleteUser(id: string) {
+		const user = await this.findOneUser(id);
 
-		post.status = false;
+		user.status = Status.DELETED;
 
 		try {
-			post.save();
+			await user.save();
 		} catch (error) {
-			throw CustomError.internalServer('Error deleting post');
+			throw CustomError.internalServer('Error deleting user');
 		}
 	}
 }

@@ -44,10 +44,10 @@ export class UserController {
 			.catch((error) => this.handleError(error, res));
 	};
 
-	// createUser = async (req: Request, res: Response) => {
-	// 	this.userService
-	// 		.create(req.body)
-	// 		.then((data) => res.status(200).json(data))
-	// 		.catch((error: any) => this.handleError(error, res));
-	// };
+	findAllUsers = (req: Request, res: Response) => {
+		this.userService
+			.findAllUsers()
+			.then((data) => res.status(200).json(data))
+			.catch((error) => this.handleError(error, res));
+	};
 }

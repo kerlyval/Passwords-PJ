@@ -8,6 +8,11 @@ import {
 } from 'typeorm';
 import { SecurityBox } from './securityBox.model';
 
+export enum Status {
+	ACTIVE = 'ACTIVE',
+	DELETED = 'DELETED',
+}
+
 @Entity()
 export class CredentialStorage extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
@@ -41,10 +46,11 @@ export class CredentialStorage extends BaseEntity {
 	})
 	code_2: string;
 
-	// @Column('bool', {
-	// 	default: true,
-	// })
-	// status: boolean;
+	@Column('enum', {
+		enum: Status,
+		default: Status.ACTIVE,
+	})
+	status: Status;
 
 	@Column('varchar', {
 		nullable: false,
