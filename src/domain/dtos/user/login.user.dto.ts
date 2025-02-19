@@ -4,7 +4,8 @@ export class LoginUserDto {
 	constructor(public email: string, public password: string) {}
 
 	static create(object: { [key: string]: any }): [string?, LoginUserDto?] {
-		const { email, password } = object;
+		const email = object.email?.trim();
+		const password = object.password?.trim();
 
 		if (!email) return ['Missing email'];
 		if (!regularExp.email.test(email)) return ['Invalid Email'];
