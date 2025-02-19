@@ -7,11 +7,8 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Status } from '../../enums/status.enum';
 
-export enum Status {
-	ACTIVE = 'ACTIVE',
-	DELETED = 'DELETED',
-}
 @Entity()
 export class SecurityBox extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')

@@ -13,17 +13,13 @@ async function main() {
 		database: envs.DB_DATABASE,
 		port: envs.DB_PORT,
 	});
+
+	await postgres.connect();
+
 	const server = new Server({
-		port: 3300,
+		port: envs.PORT,
 		routes: AppRoutes.routes,
 	});
-
-	// await postgres.connect();
-
-	// const server = new Server({
-	// 	port: envs.PORT,
-	// 	routes: AppRoutes.routes,
-	// });
 
 	await server.start();
 }

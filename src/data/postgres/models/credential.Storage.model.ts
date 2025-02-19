@@ -7,11 +7,7 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SecurityBox } from './securityBox.model';
-
-export enum Status {
-	ACTIVE = 'ACTIVE',
-	DELETED = 'DELETED',
-}
+import { Status } from '../../enums/status.enum';
 
 @Entity()
 export class CredentialStorage extends BaseEntity {

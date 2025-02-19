@@ -7,12 +7,7 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { encriptAdapter } from '../../../config';
-
-export enum Status {
-	ACTIVE = 'ACTIVE',
-	INACTIVE = 'INACTIVE',
-	DELETED = 'DELETED',
-}
+import { Status } from '../../enums/status.enum';
 
 // decoradores, le dan funcionalidades a un método, clase o producto
 @Entity()
