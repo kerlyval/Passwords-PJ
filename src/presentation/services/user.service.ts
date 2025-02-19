@@ -11,7 +11,7 @@ export class UserService {
 	async login(credentials: LoginUserDto) {
 		const user = await this.findUserByEmail(credentials.email);
 
-		const isMatching = encriptAdapter.compare(
+		const isMatching = await encriptAdapter.compare(
 			credentials.password,
 			user.password,
 		);
@@ -44,6 +44,8 @@ export class UserService {
 		//aqui colocar lo de la contrraseña
 		//Recordar que el Pin es el que se relaciona aquí solo tengo que ver como
 		//TODO: Pin
+
+		user.password = await encriptAdapter.hash(userData.password);
 
 		try {
 			const dbUser = await user.save();
@@ -80,18 +82,26 @@ export class UserService {
 	}
 
 	async findOneUser(userId: string) {
-		const result = await User.createQueryBuilder('user')
-			.where('user.id = id', { id: userId })
-			.andWhere('User.status = :userStatus', { userStatus: Status.ACTIVE })
-			.getOne();
+		try {
+			console.log('Searching for user with ID:', userId);
 
-		if (!result) {
-			throw CustomError.notFound('User not found');
+			const user = await User.findOne({
+				where: { id: userId, status: Status.ACTIVE },
+				select: ['id', 'name', 'surname', 'email', 'cellphone', 'status'],
+			});
+
+			if (!user) {
+				console.log('User not found in database!');
+				throw CustomError.notFound('User not found');
+			}
+
+			console.log('User found in database:', user);
+			return user;
+		} catch (error) {
+			console.error('Error in findOneUser:', error);
+			throw CustomError.internalServer('User not found');
 		}
-
-		return result;
 	}
-
 	//REVISAR ESTO
 	async findAllUsers() {
 		try {

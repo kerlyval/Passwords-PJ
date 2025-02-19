@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CustomError } from '../../domain';
+import { CustomError, UpdateUserDTO } from '../../domain';
 import { LoginUserDto } from '../../domain/dtos/user/login.user.dto';
 import { UserService } from '../services/user.service';
 import { RegisterUserDTO } from '../../domain/dtos/user/register.user.dto';
@@ -37,17 +37,52 @@ export class UserController {
 			.catch((error: any) => this.handleError(error, res));
 	};
 
-	findOneUser = (req: Request, res: Response) => {
+	findOneUser = async (req: Request, res: Response) => {
+		console.log('Received request for user ID', req.params.id);
+
 		this.userService
 			.findOneUser(req.params.id)
-			.then((data) => res.status(200).json(data))
-			.catch((error) => this.handleError(error, res));
+			.then((data) => {
+				console.log('User fund:', data);
+				res.status(200).json(data);
+			})
+
+			.catch((error) => {
+				console.log('Error finding One User', error);
+				this.handleError(error, res);
+			});
 	};
 
-	findAllUsers = (req: Request, res: Response) => {
+	findAllUsers = async (req: Request, res: Response) => {
 		this.userService
 			.findAllUsers()
 			.then((data) => res.status(200).json(data))
 			.catch((error) => this.handleError(error, res));
+	};
+
+	updateUser = (req: Request, res: Response) => {
+		const { id } = req.params;
+
+		const [error, updateProductDto] = UpdateUserDTO.create(req.body);
+
+		if (error) return res.status(422).json({ message: error });
+
+		this.userService
+			.updateUser(id, updateProductDto!) // ! confia xD
+			.then((data) => {
+				return res.status(200).json(data);
+			})
+			.catch((error: unknown) => this.handleError(error, res));
+	};
+
+	deleteUser = async (req: Request, res: Response) => {
+		const { id } = req.params;
+
+		this.userService
+			.deleteUser(id)
+			.then(() => {
+				return res.status(204).json(null);
+			})
+			.catch((error: any) => this.handleError(error, res));
 	};
 }

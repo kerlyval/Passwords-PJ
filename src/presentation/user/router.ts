@@ -15,7 +15,9 @@ export class UserRouter {
 		router.post('/login', userController.login);
 
 		router.get('/', userController.findAllUsers);
-		router.get('/users/:id', userController.findOneUser);
+		router.get('/:id', userController.findOneUser);
+		router.patch('/:id', userController.updateUser);
+		router.delete('/:id', userController.deleteUser);
 
 		return router;
 	}
