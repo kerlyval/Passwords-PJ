@@ -11,7 +11,12 @@ export class CredentialStorageRouter {
 			credentialStorageService,
 		);
 
-		router.post('/', credentialStorageController.createCredential);
+		router.post('/create', credentialStorageController.createCredential);
+
+		router.get('/', credentialStorageController.findAllCredentials);
+		router.get('/:id', credentialStorageController.findOneCredential);
+		router.patch('/:id', credentialStorageController.updateCredential);
+		router.delete('/:id', credentialStorageController.deleteCredential);
 
 		return router;
 	}

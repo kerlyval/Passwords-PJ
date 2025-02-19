@@ -1,12 +1,5 @@
-import {
-	BaseEntity,
-	Column,
-	Entity,
-	JoinColumn,
-	ManyToOne,
-	PrimaryGeneratedColumn,
-} from 'typeorm';
-import { SecurityBox } from './securityBox.model';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Status } from '../../enums/status.enum';
 
 @Entity()
@@ -57,12 +50,4 @@ export class CredentialStorage extends BaseEntity {
 		nullable: false,
 	})
 	pin_id: string;
-
-	// 	@ManyToOne(() => SecurityBox, (user) => user.comments)
-	// 	@JoinColumn({ name: 'commented_by' })
-	// 	user: User;
-
-	// 	@ManyToOne(() => Post, (post) => post.comments)
-	// 	@JoinColumn({ name: 'related_post_id' })
-	// 	post: Post;
 }

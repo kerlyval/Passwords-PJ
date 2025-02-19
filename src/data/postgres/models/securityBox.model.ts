@@ -1,12 +1,4 @@
-import {
-	BaseEntity,
-	Column,
-	Entity,
-	JoinColumn,
-	ManyToOne,
-	OneToMany,
-	PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Status } from '../../enums/status.enum';
 
 @Entity()
@@ -39,15 +31,4 @@ export class SecurityBox extends BaseEntity {
 		default: Status.ACTIVE,
 	})
 	status: Status;
-
-	// @ManyToOne(() => SecurityBox, (user) => user.security_boxes)
-	// @JoinColumn({ name: 'UserId' })
-	// user: User;
-
-	// @OneToMany(
-	// 	() => CredentialStorage,
-	// 	(credentialStorage) => credentialStorage.securityBox,
-	// )
-	// @JoinColumn({ name: 'CredentialStorageId' })
-	// credentialsStorage: CredentialStorage[];
 }

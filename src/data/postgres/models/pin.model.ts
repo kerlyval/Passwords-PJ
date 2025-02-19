@@ -1,12 +1,4 @@
-import {
-	BaseEntity,
-	Column,
-	Entity,
-	JoinColumn,
-	ManyToOne,
-	OneToMany,
-	PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Pin extends BaseEntity {
@@ -18,11 +10,4 @@ export class Pin extends BaseEntity {
 		nullable: false,
 	})
 	code: string;
-
-	// @ManyToOne(() => User, (user) => user.posts)
-	// @JoinColumn({ name: 'publish_by' }) //así le podemos cambiar el nombre
-	// user: User;
-
-	// @OneToMany(() => Comment, (comment) => comment.post)
-	// comments: Comment[];
 }

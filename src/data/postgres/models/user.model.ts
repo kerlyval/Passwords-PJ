@@ -1,12 +1,5 @@
-import {
-	BaseEntity,
-	BeforeInsert,
-	Column,
-	Entity,
-	OneToMany,
-	PrimaryGeneratedColumn,
-} from 'typeorm';
-import { encriptAdapter } from '../../../config';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Status } from '../../enums/status.enum';
 
 // decoradores, le dan funcionalidades a un método, clase o producto
@@ -52,15 +45,4 @@ export class User extends BaseEntity {
 		default: Status.ACTIVE,
 	})
 	status: Status;
-
-	// @OneToMany(() => Post, (post) => post.user)
-	// posts: Post[];
-
-	// @OneToMany(() => Comment, (comment) => comment.user)
-	// comments: Comment[];
-
-	// @BeforeInsert()
-	// encryptedPassword() {
-	// 	this.password = encriptAdapter.hash(this.password);
-	// }
 }
