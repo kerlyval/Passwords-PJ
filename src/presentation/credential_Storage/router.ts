@@ -1,18 +1,17 @@
 import { Router } from 'express';
 import { CredentialStorageController } from './controller';
+import { CredentialStorageService } from '../services/credentialStorage.service';
 
 export class CredentialStorageRouter {
 	static get routes(): Router {
 		const router = Router();
 
-		// const credentialStorageService = new CredentialStorageService();
-		// const credentialStorageController = new CredentialStorageController();
+		const credentialStorageService = new CredentialStorageService();
+		const credentialStorageController = new CredentialStorageController(
+			credentialStorageService,
+		);
 
-		// router.get('/', (req, res) => {
-		// 	return res.status(200).json({
-		// 		message: 'Enre a la ruta',
-		// 	});
-		// });
+		router.post('/', credentialStorageController.createCredential);
 
 		return router;
 	}
